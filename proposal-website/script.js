@@ -24,8 +24,6 @@ const noBtn = document.getElementById('noBtn');
 const celebration = document.getElementById('celebration');
 const mainContainer = document.getElementById('mainContainer');
 
-let noBtnClickCount = 0;
-
 yesBtn.addEventListener('click', () => {
     mainContainer.style.display = 'none';
     celebration.classList.remove('hidden');
@@ -39,43 +37,24 @@ yesBtn.addEventListener('click', () => {
     createConfetti();
 });
 
-noBtn.addEventListener('click', (e) => {
-    noBtnClickCount++;
-    
-    if (noBtnClickCount === 1) {
-        noBtn.textContent = 'Are you sure? 🥺';
-        noBtn.style.background = 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)';
-    } else if (noBtnClickCount === 2) {
-        noBtn.textContent = 'Think again! 💔';
-        noBtn.style.background = 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)';
-    } else if (noBtnClickCount === 3) {
-        noBtn.textContent = 'Please? 🥹';
-        noBtn.style.background = 'linear-gradient(135deg, #f87171 0%, #ef4444 100%)';
-        noBtn.style.color = 'white';
-    } else {
-        // Make the No button run away
-        const container = mainContainer.getBoundingClientRect();
-        const button = noBtn.getBoundingClientRect();
-        
-        const maxX = container.width - button.width - 40;
-        const maxY = container.height - button.height - 40;
-        
-        const randomX = Math.random() * maxX;
-        const randomY = Math.random() * maxY;
-        
-        noBtn.style.position = 'absolute';
-        noBtn.style.left = randomX + 'px';
-        noBtn.style.top = randomY + 'px';
-        noBtn.textContent = 'Catch me! 😝';
-    }
-});
-
-// Make Yes button grow when hovering over No button
+// Make the No button run away on hover
 noBtn.addEventListener('mouseenter', () => {
-    if (noBtnClickCount >= 3) {
-        yesBtn.style.transform = 'scale(1.2)';
-        yesBtn.style.transition = 'transform 0.3s ease';
-    }
+    const container = mainContainer.getBoundingClientRect();
+    const button = noBtn.getBoundingClientRect();
+    
+    const maxX = container.width - button.width - 40;
+    const maxY = container.height - button.height - 40;
+    
+    const randomX = Math.random() * maxX;
+    const randomY = Math.random() * maxY;
+    
+    noBtn.style.position = 'absolute';
+    noBtn.style.left = randomX + 'px';
+    noBtn.style.top = randomY + 'px';
+    
+    // Make Yes button grow
+    yesBtn.style.transform = 'scale(1.2)';
+    yesBtn.style.transition = 'transform 0.3s ease';
 });
 
 noBtn.addEventListener('mouseleave', () => {
